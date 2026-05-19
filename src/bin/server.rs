@@ -34,8 +34,10 @@ async fn handle_connection(
                         // Only process text messages
                         if let Some(text) = msg.as_text() {
 
+                            // MODIFIKASI 2.3: Sertakan informasi pengirim (IP:Port)
+                            // ke dalam pesan broadcast
                             let formatted =
-                                format!("{addr}: {text}");
+                                format!("[{addr}]: {text}");
 
                             println!("{formatted}");
 

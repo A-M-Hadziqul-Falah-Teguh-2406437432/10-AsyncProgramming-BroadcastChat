@@ -66,7 +66,9 @@ async fn main() -> Result<(), tokio_websockets::Error> {
 
                         if let Some(text) = msg.as_text() {
 
-                            println!("{text}");
+                            // MODIFIKASI 2.3: Tampilan pesan masuk dengan prefix
+                            // agar informasi sender terlihat jelas
+                            println!(">>> {text}");
                         }
                     }
 

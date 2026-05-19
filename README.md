@@ -33,3 +33,15 @@ Definisi protokol ini secara teknis diatur melalui crate `tokio_websockets` yang
 Selain file server dan client utama, tidak ada file konfigurasi lain yang perlu diubah karena alamat IP dan port didefinisikan secara langsung (hardcoded) di dalam kode sumber tersebut.
 
 Setelah menjalankan kembali sistem dengan port 8080, saya memverifikasi bahwa fungsionalitas broadcast tetap berjalan sempurna, di mana pesan dari satu client tetap dapat diterima oleh server dan disiarkan ke seluruh client lainnya secara asinkron.
+
+## Experiment 2.3: Small changes, add IP and Port
+
+![Screenshot Experiment 2.3](images/Experiment2.3.jpg)
+
+1. Pada eksperimen ini, saya memodifikasi logika server agar setiap pesan yang disiarkan ke seluruh client menyertakan identitas unik berupa alamat IP dan nomor port pengirim.
+2. Informasi alamat ini diperoleh dari variabel `addr` bertipe `SocketAddr` yang ditangkap oleh server saat proses jabat tangan TCP pertama kali terjadi.
+3. Modifikasi dilakukan dengan menggunakan makro `format!` di sisi server untuk menggabungkan alamat pengirim dengan isi pesan teks sebelum dikirim ke saluran broadcast.
+4. Perubahan ini memungkinkan setiap pengguna chat untuk mengidentifikasi asal pesan secara spesifik meskipun aplikasi belum memiliki sistem login atau username.
+5. Di sisi client, saya menyesuaikan output terminal agar pesan yang diterima dari server ditampilkan dengan format yang lebih menonjol agar informasi pengirim mudah dibaca.
+6. Hal ini menunjukkan bagaimana metadata koneksi dalam pemrograman asinkron dapat dimanfaatkan untuk memperkaya data aplikasi tanpa memerlukan input tambahan dari pengguna.
+7. Dengan menyertakan port, kita bisa membedakan antar client meskipun mereka berasal dari IP lokal yang sama (127.0.0.1), karena setiap koneksi websocket akan membuka port ephemeral yang berbeda di sisi client.
