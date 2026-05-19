@@ -80,13 +80,13 @@ async fn handle_connection(
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
-
+    // MODIFIKASI: Mengubah port dari 2000 ke 8080
     // Broadcast channel
     let (bcast_tx, _) = channel(16);
 
-    let listener = TcpListener::bind("127.0.0.1:2000").await?;
+    let listener = TcpListener::bind("127.0.0.1:8080").await?;
 
-    println!("listening on port 2000");
+    println!("listening on port 8080");
 
     loop {
 
